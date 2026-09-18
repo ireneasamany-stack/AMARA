@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AMARA - African History & Knowledge AI</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8f3e8;
+    color: #2b2118;
+}
+
+header {
+    background: #3b2417;
+    color: white;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+}
+
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: #ead7b7;
+}
+
+.hero h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+    color: #3b2417;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+    font-size: 19px;
+    line-height: 1.7;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 25px;
+    background: #b8872b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 60px 20px;
+}
+
+h2 {
+    color: #3b2417;
+    font-size: 32px;
+}
+
+.chat-box {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.messages {
+    min-height: 180px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.message {
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 12px;
+    line-height: 1.6;
+}
+
+.amara {
+    background: #eee5d4;
+}
+
+.user {
+    background: #315c45;
+    color: white;
+    text-align: right;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+input {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button {
+    background: #b8872b;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.examples {
+    margin-top: 20px;
+}
+
+.example {
+    display: inline-block;
+    background: #eee5d4;
+    border: none;
+    color: #3b2417;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+
+.card h3 {
+    color: #3b2417;
+}
+
+.card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.ghana {
+    background: #3b2417;
+    color: white;
+    padding: 40px;
+    border-radius: 18px;
+}
+
+.ghana h2 {
+    color: white;
+}
+
+footer {
+    text-align: center;
+    background: #2a1a12;
+    color: white;
+    padding: 35px;
+    margin-top: 40px;
+}
+
+@media(max-width:700px) {
+
+    header {
+        display: block;
+        text-align: center;
+    }
+
+    nav {
+        margin-top: 15px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .input-area {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+AMARA
+</div>
+
+<nav>
+<a href="#history">History</a>
+<a href="#heroes">Heroes</a>
+<a href="#culture">Culture</a>
+<a href="#about">About</a>
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<h1>
+Remember Africa.<br>
+Understand Africa.<br>
+Inspire the Future.
+</h1>
+
+<p>
+Meet <strong>Amara</strong>, your AI guide to African history,
+culture, people, kingdoms, traditions and achievements.
+</p>
+
+<button class="button"
+onclick="document.getElementById('question').focus()">
+ASK AMARA
+</button>
+
+</section>
+
+
+<section class="container">
+
+<h2>What would you like to discover?</h2>
+
+<p>
+Ask Amara a question about African history and heritage.
+</p>
+
+<div class="chat-box">
+
+<div class="messages" id="messages">
+
+<div class="message amara">
+<strong>Amara:</strong>
+Hello, I'm Amara. 🌍
+Ask me about African history, kingdoms,
+heroes, culture and heritage.
+</div>
+
+</div>
+
+
+<div class="input-area">
+
+<input
+id="question"
+type="text"
+placeholder="Ask Amara a question..."
+onkeydown="if(event.key==='Enter') askAmara()"
+>
+
+<button onclick="askAmara()">
+ASK
+</button>
+
+</div>
+
+
+<div class="examples">
+
+<button class="example"
+onclick="askQuestion('Who was Yaa Asantewaa?')">
+Yaa Asantewaa
+</button>
+
+<button class="example"
+onclick="askQuestion('Tell me about the Ashanti Empire.')">
+Ashanti Empire
+</button>
+
+<button class="example"
+onclick="askQuestion('What is Kente?')">
+Kente
+</button>
+
+<button class="example"
+onclick="askQuestion('Who was Kwame Nkrumah?')">
+Kwame Nkrumah
+</button>
+
+<button class="example"
+onclick="askQuestion('When did Ghana become independent?')">
+Ghana Independence
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="container" id="history">
+
+<h2>Explore Africa</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>👑 Kingdoms & Empires</h3>
+<p>
+Discover African kingdoms, empires,
+states, rulers and ancient trade networks.
+</p>
+</div>
+
+
+<div class="card" id="heroes">
+
+<h3>🧑🏿 African Heroes</h3>
+
+<p>
+Learn about African leaders, warriors,
+thinkers, activists and cultural figures.
+</p>
+
+</div>
+
+
+<div class="card" id="culture">
+
+<h3>🎨 Culture & Heritage</h3>
+
+<p>
+Explore African languages, clothing,
+symbols, music, traditions and art.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>📜 Independence</h3>
+
+<p>
+Learn about colonialism, resistance
+movements and African independence.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="container">
+
+<div class="ghana">
+
+<h2>Start Here: Ghana 🇬🇭</h2>
+
+<p>
+From ancient societies and gold-trading networks
+to the Asante Empire, the colonial Gold Coast
+and independence, Ghana's story is part of
+a much larger African story.
+</p>
+
+</div>
+
+</section>
+
+
+<section class="container" id="about">
+
+<h2>History deserves evidence.</h2>
+
+<p>
+Amara is designed to distinguish documented facts
+from oral traditions, interpretations and historical debates.
+As the project grows, important historical answers will
+include sources so users can investigate the evidence themselves.
+</p>
+
+</section>
+
+
+<footer>
+
+<strong>AMARA</strong>
+
+<br><br>
+
+Remember Africa. Understand Africa. Inspire the Future.
+
+<br><br>
+
+African History • African Culture • African Knowledge • African Stories
+
+<br><br>
+
+Prototype 0.1 © 2026
+
+</footer>
+
+
+<script>
+
+const knowledge = [
+
+{
+keywords: ["yaa asantewaa"],
+answer:
+"Yaa Asantewaa was the Queen Mother of Ejisu and a major figure in the 1900 Asante resistance against British colonial authority. She is strongly associated with the War of the Golden Stool and remains an important symbol of resistance and women's leadership."
+},
+
+{
+keywords: ["ashanti empire", "asante empire", "ashanti"],
+answer:
+"The Asante state developed into a powerful political force in central Ghana. Osei Tutu and Okomfo Anokye are traditionally associated with its early unification, while the Golden Stool became a central symbol of Asante unity and identity. Asante reached major political and economic influence in the 18th century."
+},
+
+{
+keywords: ["golden stool", "sika dwa kofi"],
+answer:
+"The Golden Stool, known as Sika Dwa Kofi, is one of the most important symbols of Asante identity and unity. It represents the spiritual soul and collective authority of the Asante nation."
+},
+
+{
+keywords: ["kwame nkrumah", "nkrumah"],
+answer:
+"Kwame Nkrumah was a central leader of Ghana's independence movement. He became the first Prime Minister of independent Ghana in 1957 and later served as president. He was also an important figure in African decolonization and Pan-African politics."
+},
+
+{
+keywords: ["ghana independence", "when did ghana become independent", "ghana became independent"],
+answer:
+"Ghana became independent from British colonial rule on 6 March 1957. It was the first sub-Saharan African country to gain independence from European colonial rule in the modern wave of African decolonization."
+},
+
+{
+keywords: ["kente"],
+answer:
+"Kente is a Ghanaian woven textile traditionally made from narrow strips woven on looms and then joined. Its colours and designs can communicate identity, social status, history, proverbs and ideas."
+},
+
+{
+keywords: ["adinkra"],
+answer:
+"Adinkra symbols are visual symbols associated especially with Akan and Asante traditions. They communicate ideas, values, beliefs and proverbs and have been used in textiles, architecture and other cultural forms."
+},
+
+{
+keywords: ["elmina castle", "elmina"],
+answer:
+"Elmina Castle was built by the Portuguese in 1482. It began as a trading post strongly connected to gold and later became deeply involved in the transatlantic slave trade. The site later came under Dutch and British control."
+},
+
+{
+keywords: ["cape coast castle"],
+answer:
+"Cape Coast Castle was first established by the Swedes in 1653 and later came under Dutch and British control. It became deeply connected with the transatlantic slave trade and later colonial administration."
+},
+
+{
+keywords: ["gold coast"],
+answer:
+"The name Gold Coast became associated with the region because gold was an important commodity in its history and trade with European merchants."
+},
+
+{
+keywords: ["history of ghana", "ghana history"],
+answer:
+"Ghana is a country in West Africa. Before colonial rule, the region was home to many societies and states, including Akan states, Asante, Akwamu, Fante, Ga and Ewe communities. Britain eventually established the Gold Coast colony, and the Gold Coast became independent as Ghana on 6 March 1957."
+},
+
+{
+keywords: ["big six"],
+answer:
+"Ghana's Big Six are Kwame Nkrumah, Ebenezer Ako Adjei, Edward Akufo-Addo, J.B. Danquah, Emmanuel Obetsebi-Lamptey and William Ofori Atta. They are remembered for important roles in Ghana's nationalist movement."
+}
+
+];
+
+
+function addMessage(text, type) {
+
+const messages =
+document.getElementById("messages");
+
+const div =
+document.createElement("div");
+
+div.className =
+"message " + type;
+
+div.innerHTML = text
+    .replace(/\\\*\\\*(.*?)\\\*\\\*/g, "<strong>$1</strong>")
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\\\*(.*?)\\\*/g, "<em>$1</em>")
+    .replace(/(^|\n)- (.*?)(?=\n|$)/g, "$1• $2");
+messages.appendChild(div);
+
+messages.scrollTop =
+messages.scrollHeight;
+
+}
+
+
+function askQuestion(question) {
+
+document.getElementById("question").value =
+question;
+
+askAmara();
+
+}
+
+
+async function askAmara() {
+
+    const input = document.getElementById("question");
+
+    const question = input.value.trim();
+
+    if (question === "") {
+        return;
+    }
+
+    addMessage(question, "user");
+
+    input.value = "";
+
+    addMessage(
+        "Amara: Thinking...",
+        "amara"
+    );
+
+    try {
+
+        const response = await fetch("/api/chat", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                question: question
+            })
+
+        });
+
+        const data = await response.json();
+
+        const messages =
+            document.getElementById("messages");
+
+        messages.lastElementChild.remove();
+
+        addMessage(
+            "Amara: " + data.answer,
+            "amara"
+        );
+
+    } catch (error) {
+
+        const messages =
+            document.getElementById("messages");
+
+        messages.lastElementChild.remove();
+
+        addMessage(
+            "Amara: I couldn't connect to my backend. Please make sure the AMARA server is running.",
+            "amara"
+        );
+
+        console.error(error);
+    }
+}
+</script>
+</body>
+</html>

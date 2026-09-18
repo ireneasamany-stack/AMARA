@@ -11,23 +11,23 @@ const client = new OpenAI({
 const fs = require("fs");
 const path = require("path");
 
-const nexusFile = path.join(__dirname, "nexus", "ghana history.md");
+const nexusFile = path.join(__dirname, "Nexus", "ghana history.md");
 
 const nexusKnowledge = fs.readFileSync(nexusFile, "utf8");
 
-const sourceFile = path.join(__dirname, "nexus", "sources", "ghana-history-sources.md");
+const sourceFile = path.join(__dirname, "Nexus", "sources", "ghana-history-sources.md");
 
 const sourceKnowledge = fs.readFileSync(sourceFile, "utf8");
 
-const traditionsFile = path.join(__dirname, "nexus", "ghana-traditions.md");
+const traditionsFile = path.join(__dirname, "Nexus", "ghana-traditions.md");
 
 const traditionsKnowledge = fs.readFileSync(traditionsFile, "utf8");
 
-const ethnicGroupsFile = path.join(__dirname, "nexus", "ghana-ethnic-groups.md");
+const ethnicGroupsFile = path.join(__dirname, "Nexus", "ghana-ethnic-groups.md");
 
 const ethnicGroupsKnowledge = fs.readFileSync(ethnicGroupsFile, "utf8");
 
-const kingdomsFile = path.join(__dirname, "nexus", "ghana-kingdoms-and-states.md");
+const kingdomsFile = path.join(__dirname, "Nexus", "ghana-kingdoms-and-states.md");
 
 const kingdomsKnowledge = fs.readFileSync(kingdomsFile, "utf8");
 app.use(express.json());
